@@ -1,2 +1,2 @@
 # todoapp
- To do app with Django
+ To do app with Django for my Django Basics repository
