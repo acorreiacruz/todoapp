@@ -1,2 +1,2 @@
 # project
- To do app with Django for my Django Basics repository
+ To do app with Django and Django REST Framework.
