@@ -21,7 +21,7 @@
             <button><a href="{% url 'todo:excluir' tarefa.id %}">Excluir</a></button>
             <hr>
         {% endfor %}
-        {% if tarefa is None %}
+        {% if tarefas is None %}
             <p>
                 Todas as tarefas foram finalizadas!
             </p>
