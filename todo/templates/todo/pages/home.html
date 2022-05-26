@@ -8,16 +8,15 @@
 </head>
 <body>
     <header>
-        <h1>Minhas Tarefas</h1>
+        <h1>To Do</h1>
     </header>
     <main>
         {% for tarefa in tarefas  %}
-            <div>
-                <h2>{{ tarefa.title }}</h2>
-                <p>
-                    {{ tarefa.description }}
-                </p>
-            </div>
+            {% if not tarefa.done %}
+                <div>
+                    <h2>{{ tarefa.title }}</h2>
+                </div>
+            {% endif %}
         {% endfor %}
     </main>
 
