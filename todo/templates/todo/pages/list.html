@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <h1>To Do</h1>
+    </header>
+    <main>
+        {% for tarefa in tarefas  %}
+            <div>
+                <h2>{{ tarefa.title }}</h2>
+                <p>Criada: {{ tarefa.created_at | date }} | Atualizada: {{ tarefa.updated_at | date }}</p>
+            </div>
+            <button><a href="{% url 'todo:detalhar' tarefa.id %}">Detalhar</a></button>
+            <button><a href="{% url 'todo:finalizar' tarefa.id %}">Finalizar</a></button>
+            <button><a href="{% url 'todo:excluir' tarefa.id %}">Excluir</a></button>
+            <hr>
+        {% endfor %}
+        {% if tarefa is None %}
+            <p>
+                Todas as tarefas foram finalizadas!
+            </p>
+        {% endif %}
+        <div>
+            <button><a href="{% url 'todo:cadastrar' %}">Nova Tarefa</a></button>
+        </div>
+    </main>
+</body>
+</html>
