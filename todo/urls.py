@@ -4,5 +4,9 @@ from . import views
 app_name = 'todo'
 
 urlpatterns = [
-    path('',views.hello, name='hello'),
+    path('',views.listar_tarefas, name='listar'),
+    path('tarefas/<int:pk>/',views.detalhar_tarefas, name="detalhar"),
+    path('tarefas/excluir/<int:pk>/',views.excluir_tarefa, name='excluir'),
+    path('tarefas/finalizar/<int:pk>/', views.finalizar_tarefa, name="finalizar"),
+    path('tarefas/cadastrar/', views.cadastrar_tarefas, name='cadastrar'),
 ]
