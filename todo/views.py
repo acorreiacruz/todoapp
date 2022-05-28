@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Tarefa
+from .forms import Cadastrar
 
 
 def listar_tarefas(request):
@@ -33,4 +34,7 @@ def finalizar_tarefa(request, pk):
     return redirect('/')
 
 def cadastrar_tarefas(request):
-    return render(request, 'todo/pages/create.html')
+    form = Cadastrar()
+    return render(request, 'todo/pages/create.html', context={
+        'form': form,
+    })
