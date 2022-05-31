@@ -33,6 +33,7 @@ def finalizar_tarefa(request, pk):
     Tarefa.objects.filter(id=pk).update(done=True)
     return redirect('/')
 
+
 def cadastrar_tarefas(request):
     form = Cadastrar()
     return render(request, 'todo/pages/create.html', context={

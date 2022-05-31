@@ -7,6 +7,10 @@
     <title>Nova Tarefa</title>
 </head>
 <body>
-    <h1>Aqui vai o formulário de cadastro !</h1>
+    <h1>Cadastre uma nova tarefa.</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+    </form>
 </body>
 </html>
