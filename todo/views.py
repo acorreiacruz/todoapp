@@ -47,7 +47,6 @@ def cadastrar_tarefas(request):
 
 
 def cadastrar_tarefas_validar(request):
-    
     if not request.POST:
         return Http404()
     
