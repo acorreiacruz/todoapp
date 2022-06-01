@@ -45,8 +45,8 @@ class TarefasTest(TestCase):
         self.assertTemplateUsed(response, 'todo/pages/detail.html')
 
 
-    def test_if_detalhar_tarefas_view_return_404(self):
-        response = self.client.get(reverse("todo:detalhar",kwargs={'pk':1}))
+    def test_se__view_detalhar_tarefas_retorna_status_code_404(self):
+        response = self.client.get(reverse("todo:detalhar", kwargs={'pk':1000}))
         self.assertEqual(response.status_code, 404)
 
 
@@ -70,12 +70,12 @@ class TarefasTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     
-    def teste_se_url_da_view_cadastrar_tarefas_validar_esta_correta(self):
+    def test_se_url_da_view_cadastrar_tarefas_validar_esta_correta(self):
         url = reverse('todo:cadastrar_validar')
         self.assertEqual('/tarefas/cadastrar/validar/', url)
 
     
-    def teste_se_funcao_da_view_cadastrar_tarefas_validar_esta_correta(self):
+    def test_se_funcao_da_view_cadastrar_tarefas_validar_esta_correta(self):
         resolve_object = resolve(reverse('todo:cadastrar_validar'))
         self.assertIs(resolve_object.func, cadastrar_tarefas_validar)
 
