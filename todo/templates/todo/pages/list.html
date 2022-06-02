@@ -20,12 +20,11 @@
             <button><a href="{% url 'todo:finalizar' tarefa.id %}">Finalizar</a></button>
             <button><a href="{% url 'todo:excluir' tarefa.id %}">Excluir</a></button>
             <hr>
-        {% endfor %}
-        {% if tarefas is None %}
+        {% empty %}
             <p>
-                Todas as tarefas foram finalizadas!
+                Todas as tarefas foram atualizadas!
             </p>
-        {% endif %}
+        {% endfor %}
         <div>
             <button><a href="{% url 'todo:cadastrar' %}">Nova Tarefa</a></button>
         </div>
