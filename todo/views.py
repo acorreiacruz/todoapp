@@ -7,10 +7,10 @@ from .forms import Cadastrar
 
 def listar_tarefas(request):
     tarefas = Tarefa.objects.filter(
-        done = False,
+        done=False,
     ).order_by('title')
 
-    return render(request,"todo/pages/list.html",context={
+    return render(request, "todo/pages/list.html", context={
         "tarefas": tarefas,
     })
 
@@ -18,7 +18,7 @@ def listar_tarefas(request):
 def detalhar_tarefas(request, pk):
     tarefa = get_object_or_404(
         Tarefa.objects.all(),
-        id = pk
+        id=pk
     )
 
     return render(request, "todo/pages/detail.html", context={
@@ -27,7 +27,7 @@ def detalhar_tarefas(request, pk):
 
 
 def excluir_tarefa(request, pk):
-    Tarefa.objects.filter(id = pk).delete()
+    Tarefa.objects.filter(id=pk).delete()
     return redirect('/')
 
 
@@ -49,7 +49,7 @@ def cadastrar_tarefas(request):
 def cadastrar_tarefas_validar(request):
     if not request.POST:
         return Http404()
-    
+
     dados_form = request.POST
     request.session['dados_form'] = dados_form
     form = Cadastrar(dados_form)
@@ -57,7 +57,5 @@ def cadastrar_tarefas_validar(request):
     if form.is_valid():
         form.save()
         del(request.session['dados_form'])
-    
+
     return redirect('todo:cadastrar')
-
-
