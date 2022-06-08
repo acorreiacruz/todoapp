@@ -13,15 +13,31 @@ class Cadastrar(forms.ModelForm):
         error_messages={
             'required': 'Por favor insira um título para a tarefa'
         },
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Ex.: Minha Tarefa',
+        }),
+    )
+
+    description = forms.CharField(
+        max_length=300,
+        label='Descrição',
+        label_suffix=':',
+        help_text='Escreva a descrição da tarefa',
+        error_messages={
+            'required': 'Por favor, insira uma descrição para a tarefa',
+        },
+        widget=forms.Textarea(attrs={
+            'placeholder': 'Ex.: Aqui vai uma descrição detalhada da tarefa!',
+        })
     )
 
     done = forms.BooleanField(
-        label='Feito',
+        label='Tarefa já foi feita ?',
         label_suffix=':',
-        help_text='Verdadeiro ou falso, se a tarefa já foi feita ou não',
+        help_text='Check -> já concluída | Uncheck -> não concluída',
         error_messages={
             'required': 'Este campo é obrigatório, escolha uma opção'
-        }
+        },
     )
 
     class Meta:
