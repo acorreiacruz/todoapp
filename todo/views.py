@@ -48,7 +48,7 @@ def cadastrar_tarefas(request):
 
 def cadastrar_tarefas_validar(request):
     if not request.POST:
-        return Http404()
+        raise Http404()
 
     dados_form = request.POST
     request.session['dados_form'] = dados_form
