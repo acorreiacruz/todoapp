@@ -8,9 +8,23 @@
 </head>
 <body>
     <h1>Cadastre uma nova tarefa.</h1>
+
     <form action="{{ form_action }}" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for field in form %}
+            <div>
+                <p>
+                    <label for="{{ field.id_for_label }}"> {{ field.label }}:</label>
+                </p>
+                <input type="text">
+                <p>
+                    {{ field.errors }}
+                </p>
+                <p>
+                    {{ field.help_text }}
+                </p>
+            </div>
+        {% endfor %}
         <input type="submit" value="Cadastrar">
     </form>
 </body>
