@@ -6,12 +6,15 @@ class Cadastrar(forms.ModelForm):
 
     title = forms.CharField(
         max_length=150,
-        min_length=10,
+        min_length=4,
         label='Título da Tarefa',
         label_suffix=':',
-        help_text='Ensira o título para a sua tarefa',
+        help_text='Insira o título para a sua tarefa',
         error_messages={
-            'required': 'Por favor insira um título para a tarefa'
+            'required': 'Campo obrigatório, por favor insira um título para\
+            a tarefa',
+            'max_length': 'O título pode ter no máximo 150 caracteres',
+            'min_length': 'O título deve ter no mínimo 4 caracteres',
         },
         widget=forms.TextInput(attrs={
             'placeholder': 'Ex.: Minha Tarefa',
@@ -20,24 +23,20 @@ class Cadastrar(forms.ModelForm):
 
     description = forms.CharField(
         max_length=300,
+        min_length=4,
         label='Descrição',
         label_suffix=':',
         help_text='Escreva a descrição da tarefa',
         error_messages={
-            'required': 'Por favor, insira uma descrição para a tarefa',
+            'required': 'Campo obrigatório, por favor insira uma descrição para\
+            a tarefa',
+            'max_length': 'A descrição pode ter no máximo 300 caracteres',
+            'min_length': 'A descrição deve ter no mínimo 4 caracteres',
         },
         widget=forms.Textarea(attrs={
-            'placeholder': 'Ex.: Aqui vai uma descrição detalhada da tarefa!',
+            'placeholder': 'Ex.: Escreva uma descrição detalhada da tarefa de\
+            até 300 caracteres!',
         })
-    )
-
-    done = forms.BooleanField(
-        label='Tarefa já foi feita ?',
-        label_suffix=':',
-        help_text='Check -> já concluída | Uncheck -> não concluída',
-        error_messages={
-            'required': 'Este campo é obrigatório, escolha uma opção'
-        },
     )
 
     class Meta:
