@@ -5,6 +5,7 @@ from .models import Tarefa
 class Cadastrar(forms.ModelForm):
 
     title = forms.CharField(
+        required=True,
         max_length=150,
         min_length=4,
         label='Título da Tarefa',
@@ -22,6 +23,7 @@ class Cadastrar(forms.ModelForm):
     )
 
     description = forms.CharField(
+        required=True,
         max_length=300,
         min_length=4,
         label='Descrição',
