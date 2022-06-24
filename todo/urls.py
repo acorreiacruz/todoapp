@@ -22,4 +22,5 @@ urlpatterns = [
         views.cadastrar_tarefas_validar,
         name='cadastrar_validar'
     ),
+    path('tarefas/buscar/', views.buscar_tarefas, name='buscar'),
 ]
