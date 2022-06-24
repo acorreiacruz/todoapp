@@ -11,6 +11,13 @@
         <h1>To Do</h1>
     </header>
     <main>
+        <div>
+            <form action="{% url 'todo:buscar' %}" method='GET'>
+                {% csrf_token %}
+                <input type="text" name='q'>
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
         {% for tarefa in tarefas  %}
             <div>
                 <h2>{{ tarefa.title }}</h2>
