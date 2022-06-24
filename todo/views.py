@@ -59,3 +59,16 @@ def cadastrar_tarefas_validar(request):
         del(request.session['dados_form'])
 
     return redirect('todo:cadastrar')
+
+
+def buscar_tarefas(request):
+
+    q = request.GET.get('q', '')
+    tarefas = Tarefa.objects.filter(
+        done=False,
+        title__icontains=q
+    )
+
+    return render(request, 'todo/pages/list.html', context={
+        'tarefas': tarefas,
+    })
