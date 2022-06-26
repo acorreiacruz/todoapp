@@ -1,20 +1,21 @@
-from msilib.schema import ReserveCost
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django.urls import resolve, reverse
 from parameterized import parameterized
-from unittest import skip
 from .forms import Cadastrar
 from .models import Tarefa
-from .views import (buscar_tarefas, cadastrar_tarefas, cadastrar_tarefas_validar,
-                    detalhar_tarefas, excluir_tarefa, finalizar_tarefa,
-                    listar_tarefas)
+from .views import (
+        buscar_tarefas,
+        cadastrar_tarefas,
+        cadastrar_tarefas_validar,
+        detalhar_tarefas,
+        excluir_tarefa,
+        finalizar_tarefa,
+        listar_tarefas
+    )
 
 
 class TarefaTestBase(TestCase):
-
-    def setUp(self) -> None:
-        return super().setUp()
 
     def criar_tarefa(
         self,
@@ -152,11 +153,6 @@ class TarefasTest(TarefaTestBase):
         response = self.client.get(reverse('todo:cadastrar'))
         self.assertEqual(response.status_code, 200)
 
-    @skip('Terminar de escrever o teste que verifica se o context da view esta\
-    correto')
-    def test_se_context_da_view_cadastrar_tarefas_esta_correto(self):
-        ...
-
     def test_se_url_da_view_cadastrar_tarefas_validar_esta_correta(self):
         url = reverse('todo:cadastrar_validar')
         self.assertEqual('/tarefas/cadastrar/validar/', url)
@@ -215,166 +211,157 @@ class TarefasTest(TarefaTestBase):
         resposta = self.client.get(reverse('todo:buscar'))
         self.assertEqual(resposta.status_code, 200)
 
-    def test_se_view_buscar_tarefas_retorna_status_code_404(self):
-        ...
+    def test_se_view_buscar_tarefas_retorna_tarefa_correta(self):
+        tarefa = self.criar_tarefa(title='Tarefa Buscada')
+        resposta = self.client.get(
+            reverse('todo:buscar'),
+            {'q': 'Tarefa Buscada'}
+        )
+        self.assertIn(tarefa.title, resposta.content.decode('utf-8'))
+
+    def test_se_view_buscar_tarefas_nao_retorna_tarefa_correta(self):
+        tarefa = self.criar_tarefa(title='Tarefa Buscada')
+        resposta = self.client.get(
+            reverse('todo:buscar'),
+            {'q': 'Z'}
+        )
+        self.assertNotIn(tarefa.title, resposta.content.decode('utf-8'))
 
 
-class TestFormularioCadastrarBase(TestCase):
-
+class TestFormularioCadastrar(TestCase):
     def setUp(self) -> None:
         self.data = {
-            'title': 'Título da Nova Tarefa',
-            'description': 'Descrição da Nova Tarefa'
+            'title': 'Título da Tarefa',
+            'description': 'Descrição da tarefa'
         }
         return super().setUp()
 
-    def criar_formulario(
-        self,
-        title='Título da Nova Tarefa',
-        description='Descrição da Nova Tarefa'
-    ):
-        data = {
-            'title': title,
-            'description': description
-        }
-        return Cadastrar(data)
-
-
-class TestFormularioCadastrar(TestFormularioCadastrarBase):
-
     @parameterized.expand([
         ('title', 'Título da Tarefa'),
-        ('description', 'Descrição'),
+        ('description', 'Descrição da Tarefa')
     ])
-    def test_se_label_dos_inputs_esta_correto(self, campo, label):
-        form = Cadastrar()
-        self.assertEqual(form.fields[campo].label, label)
+    def test_se_label_dos_campos_esta_correto_e_se_e_carregado(
+        self,
+        field,
+        label
+    ):
+        form = Cadastrar(self.data)
+        self.assertEqual(form[field].field.label, label)
 
-    @parameterized.expand([
-        ('title', ':'),
-        ('description', ':'),
-    ])
-    def test_se_label_suffix_dos_inputs_esta_correto(self, campo, suffix):
-        form = Cadastrar()
-        self.assertEqual(form.fields[campo].label_suffix, suffix)
+        resposta = self.client.post(
+            reverse('todo:cadastrar_validar'),
+            self.data,
+            follow=True
+        )
+        self.assertIn(label, resposta.content.decode('utf-8'))
 
     @parameterized.expand([
         ('title', 'Ex.: Minha Tarefa'),
-        ('description', 'Ex.: Escreva uma descrição detalhada da tarefa de\
-            até 300 caracteres!'),
+        ('description', 'Ex.: Descrição detalhada da tarefa ...')
     ])
-    def test_se_placeholder_dos_inputs_esta_correto(self, campo, placeholder):
-        form = Cadastrar()
+    def test_se_placeholder_dos_campos_esta_correto_e_se_e_carregado(
+        self,
+        field,
+        placeholder
+    ):
+        form = Cadastrar(self.data)
         self.assertEqual(
-            form.fields[campo].widget.attrs['placeholder'],
+            form[field].field.widget.attrs['placeholder'],
             placeholder
         )
 
+        resposta = self.client.post(
+            reverse('todo:cadastrar_validar'),
+            self.data,
+            follow=True
+        )
+        self.assertIn(placeholder, resposta.content.decode('utf-8'))
+
     @parameterized.expand([
-        ('title', 'Insira o título para a sua tarefa'),
-        ('description', 'Escreva a descrição da tarefa'),
+        ('title', 'Insira o título para a sua tarefa, de 4 a 150 caracteres.'),
+        (
+            'description',
+            'Insira a descrição para a tarefa de 4 a 300 caracteres.'
+        )
     ])
-    def test_se_help_text_dos_inputs_esta_correto(self, campo, help_text):
-        form = Cadastrar()
-        self.assertEqual(form.fields[campo].help_text, help_text)
+    def test_se_help_text_dos_campos_esta_correto_e_se_e_carregado(
+        self,
+        field,
+        help_text
+    ):
+        form = Cadastrar(self.data)
+        self.assertEqual(form[field].field.help_text, help_text)
+
+        resposta = self.client.post(
+            reverse('todo:cadastrar_validar'),
+            self.data,
+            follow=True
+        )
+        self.assertIn(help_text, resposta.content.decode('utf-8'))
 
     @parameterized.expand([
         ('title', 'Campo obrigatório, por favor insira um título para\
             a tarefa'),
         ('description', 'Campo obrigatório, por favor insira uma descrição para\
-            a tarefa'),
+            a tarefa')
     ])
-    def test_se_mensagem_de_erro_de_required_do_campo_esta_correta(
+    def test_se_mensagem_de_required_esta_correta_e_se_e_carregada(
         self,
-        campo,
-        msg
+        field,
+        required
     ):
-        data = {
-            'title': '' if campo == 'title' else 'Título da Tarefa',
-            'description': '' if campo == 'description' else 'Descrição da\
-                 Tarefa',
-            'done': False
-        }
-        form = Cadastrar(data)
-        self.assertIn(msg, form.errors.get(campo))
-        self.assertEqual(
-            form.fields[campo].error_messages.get('required'),
-            msg
-        )
+        self.data[field] = ''
+        form = Cadastrar(self.data)
+        self.assertIn(required, form.errors.get(field))
 
-    @parameterized.expand([
-        ('title', 'O título pode ter no máximo 150 caracteres'),
-        ('description', 'A descrição pode ter no máximo 300 caracteres'),
-    ])
-    def teste_se_mesangem_de_erro_de_max_length_do_campo_esta_correta(
-        self,
-        campo,
-        mensagem
-    ):
-        form = Cadastrar()
-        self.assertEqual(
-            form.fields[campo].error_messages['max_length'],
-            mensagem
-        )
-
-    @parameterized.expand([
-        ('title', 'O título deve ter no mínimo 4 caracteres'),
-        ('description', 'A descrição deve ter no mínimo 4 caracteres'),
-    ])
-    def teste_se_mesangem_de_erro_de_min_length_do_campo_esta_correta(
-        self,
-        campo,
-        mensagem
-    ):
-        form = Cadastrar()
-        self.assertEqual(
-            form.fields[campo].error_messages['min_length'],
-            mensagem
-        )
-
-    def test_do_erro_de_comprimento_maximo_do_title(self):
-        form = self.criar_formulario(title='A'*151)
-        msg = 'O título pode ter no máximo 150 caracteres'
-        self.assertIn(msg, form.errors.get('title'))
-
-    @skip('Terminar de criar este teste!')
-    def test_do_erro_de_comprimento_maximo_do_title_no_template(self):
-        self.data['title'] = "A" * 151
         resposta = self.client.post(
-            reverse('todo:cadastrar'),
+            reverse('todo:cadastrar_validar'),
             self.data,
             follow=True
         )
-        conteudo = resposta.content.decode('utf-8')
-        mensagem = 'O título pode ter no máximo 150 caracteres'
-        self.assertIn(mensagem, conteudo)
+        self.assertIn(required, resposta.content.decode('utf-8'))
 
-    def teste_do_erro_de_comprimento_minimo_do__title(self):
-        form = self.criar_formulario(title='AAA')
-        msg = 'O título deve ter no mínimo 4 caracteres'
-        self.assertIn(msg, form.errors.get('title'))
-
-    def test_do_erro_de_comprimento_minimo_do_title_no_template(
-        self
+    @parameterized.expand([
+        ('title', 'O título deve ter no mínimo 4 caracteres', 4),
+        ('description', 'A descrição deve ter no mínimo 4 caracteres', 4)
+    ])
+    def test_se_mensagem_de_min_length_esta_correta_e_se_e_carregada(
+        self,
+        field,
+        msg,
+        min
     ):
-        self.data['title'] = 'AAA'
+        self.data[field] = 'A' * (min - 1)
+        form = Cadastrar(self.data)
+        self.assertIn(msg, form.errors.get(field))
+
         resposta = self.client.post(
-            reverse('todo:cadastrar'),
+            reverse('todo:cadastrar_validar'),
             self.data,
             follow=True
         )
-        conteudo = resposta.content.decode('utf-8')
-        mensagem = 'O título deve ter no mínimo 4 caracteres'
-        self.assertIn(mensagem, conteudo)
+        self.assertIn(msg, resposta.content.decode('utf-8'))
 
-    def teste_se_nao_levanta_erro_quando_title_possui_comprimento_normal(self):
-        form = self.criar_formulario()
-        self.assertEqual(form.errors.get('title'), None)
-
-    def test_do_erro_required_do_title_no_template(
-        self
+    @parameterized.expand([
+        ('title', 'O título pode ter no máximo 150 caracteres', 150),
+        ('description', 'A descrição pode ter no máximo 300 caracteres', 300)
+    ])
+    def test_se_mensagem_de_max_length_esta_correta_e_se_e_carregada(
+        self,
+        field,
+        msg,
+        max
     ):
-        ...
+        self.data[field] = 'A' * (max + 1)
+        form = Cadastrar(self.data)
+        self.assertIn(msg, form.errors.get(field))
+
+        resposta = self.client.post(
+            reverse('todo:cadastrar_validar'),
+            self.data,
+            follow=True
+        )
+        self.assertIn(msg, resposta.content.decode('utf-8'))
 
 
 class TestModelTarefa(TarefaTestBase):
