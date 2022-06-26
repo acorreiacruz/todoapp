@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Meus apps
     'todo',
     'api',
+    'usuarios',
     # Apps terceiros
     'rest_framework',
 ]
