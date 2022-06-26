@@ -1,31 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global/css/styles.css' %}">
     <title>Nova Tarefa</title>
 </head>
 <body>
     <h1>Cadastre uma nova tarefa.</h1>
-
     <form action="{{ form_action }}" method="POST">
         {% csrf_token %}
         {% for field in form %}
             <div>
-                <p>
-                    <label for="{{ field.id_for_label }}"> {{ field.label }}:</label>
-                </p>
-                <input type="text">
-                <p>
-                    {{ field.errors }}
-                </p>
-                <p>
-                    {{ field.help_text }}
-                </p>
+                <label for="{{ field.id_for_field }}"> {{ field.label }}:</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <p>{{ field.help_text }}</p>
+                {% endif %}
             </div>
+            {{ form.errors }}
         {% endfor %}
-        <input type="submit" value="Cadastrar">
+        <button type="submit">Cadastrar</button>
+        {% if form.errors %}
+            {{ form.errors }}
+        {% endif %}
     </form>
 </body>
 </html>
