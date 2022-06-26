@@ -10,7 +10,7 @@ class Cadastrar(forms.ModelForm):
         min_length=4,
         label='Título da Tarefa',
         label_suffix=':',
-        help_text='Insira o título para a sua tarefa, de 4 a 150 caracteres',
+        help_text='Insira o título para a sua tarefa, de 4 a 150 caracteres.',
         error_messages={
             'required': 'Campo obrigatório, por favor insira um título para\
             a tarefa',
@@ -26,9 +26,9 @@ class Cadastrar(forms.ModelForm):
         required=True,
         max_length=300,
         min_length=4,
-        label='Descrição',
+        label='Descrição da Tarefa',
         label_suffix=':',
-        help_text='Escreva a descrição para a tarefa de 4 a 300 caracteres',
+        help_text='Insira a descrição para a tarefa de 4 a 300 caracteres.',
         error_messages={
             'required': 'Campo obrigatório, por favor insira uma descrição para\
             a tarefa',
