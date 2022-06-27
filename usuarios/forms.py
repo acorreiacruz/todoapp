@@ -102,29 +102,29 @@ class Cadastrar(forms.ModelForm):
     )
 
     def clean_email(self):
-        email = self.cleaned_data.get('email')
-        exist = User.objects.filter(email=email).exists()
+        dado = self.cleaned_data.get('email')
+        exist = User.objects.filter(email=dado).exists()
         if exist:
             raise ValidationError(
                 'Endereço de e-mail já cadastrado, insira um novo',
                 code='invalid'
             )
-        return email
+        return dado
 
     def clean_username(self):
-        username = self.cleaned_data.get('username')
-        exist = User.objects.filter(username=username).exists()
+        dado = self.cleaned_data.get('username')
+        exist = User.objects.filter(username=dado).exists()
         if exist:
             raise ValidationError(
                 'Nome de usuário já cadastrado, insira um novo',
                 code='invalid'
             )
-        return username
+        return dado
 
     def clean(self):
         cleaned_data = super().clean()
         password1 = cleaned_data.get('password')
-        password2 = cleaned_data.get('passwrod_confirmation')
+        password2 = cleaned_data.get('password_confirmation')
         if password1 != password2:
             raise ValidationError(
                 'Ambas as senhas devem ser iguais!',
