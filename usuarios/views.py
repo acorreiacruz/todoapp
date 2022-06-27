@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .forms import Cadastrar
+from .forms import Cadastrar, Login
 
 
 def cadastrar(request):
@@ -28,3 +28,16 @@ def cadastrar_validar(request):
         del(request.session['dados_form'])
 
     return redirect('usuarios:cadastrar')
+
+
+def login_view(request):
+    dados_form = request.session.get('dados_form', None)
+    form = Login(dados_form)
+    return render(request, 'usuarios/pages/login.html', context={
+        'form': form,
+        'form_action': reverse('usuarios:login_validar')
+    })
+
+
+def login_view_validar(request):
+    ...
