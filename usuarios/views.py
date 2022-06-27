@@ -48,11 +48,16 @@ def login_view_validar(request):
 
     if form.is_valid():
         usuario_autenticado = authenticate(
-            email=form.cleaned_data.get('email',''),
-            password=form.cleaned_data.get('password','')
+            email=form.cleaned_data.get('email', ''),
+            password=form.cleaned_data.get('password', '')
         )
 
         if usuario_autenticado is not None:
+            messages.success(request, 'Você está logado!')
+            login(request, usuario_autenticado)
+        else:
+            messages.error(request, 'Credenciais inválidas')
+    else:
+        messages.error(request, 'E-mail ou senha inválidos!')
 
-
-
+    return redirect('usuarios:login')
