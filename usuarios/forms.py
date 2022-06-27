@@ -10,9 +10,9 @@ class Cadastrar(forms.ModelForm):
         min_length=3,
         max_length=50,
         label='Primeiro Nome',
-        help_text='Digite o seu primeiro nome, utilizando de 3 a 50 caracteres',
+        help_text='Digite o seu primeiro nome, utilizando de 3 a 50 caracteres',# noqa
         error_messages={
-            'required': 'Campo obrigatório, por favor insira o seu primeiro nome!',
+            'required': 'Campo obrigatório, por favor insira o seu primeiro nome!',# noqa
             'min_length': 'O primeiro nome deve ter no mínimo 3 caracteres',
             'max_length': 'O primeiro nome deve ter no máximo 50 caracteres',
         },
@@ -30,7 +30,7 @@ class Cadastrar(forms.ModelForm):
         label='Último Nome',
         help_text='Digite o seu último nome, utilizando de 3 a 50 caracteres',
         error_messages={
-            'required': 'Campo obrigatório, por favor insira o seu último nome!',
+            'required': 'Campo obrigatório, por favor insira o seu último nome!',# noqa
             'min_length': 'O último nome deve ter no mínimo 3 caracteres',
             'max_length': 'O último nome deve ter no máximo 50 caracteres',
         },
@@ -46,9 +46,9 @@ class Cadastrar(forms.ModelForm):
         min_length=3,
         max_length=50,
         label='Nome de Usuário',
-        help_text='Digite o seu nome de usuário, utilizando de 3 a 50 caracteres',
+        help_text='Digite o seu nome de usuário, utilizando de 3 a 50 caracteres',# noqa
         error_messages={
-            'required': 'Campo obrigatório, por favor insira o seu nome de usuário!',
+            'required': 'Campo obrigatório, por favor insira o seu nome de usuário!',# noqa
             'min_length': 'O nome de usuário deve ter no mínimo 3 caracteres',
             'max_length': 'O nome de usuário deve ter no máximo 50 caracteres',
         },
@@ -64,7 +64,7 @@ class Cadastrar(forms.ModelForm):
         label='E-mail',
         help_text='Insira um endereço de e-mail válido.',
         error_messages={
-            'required': 'Campo obrigatório, por favor insira o seu endereço de e-mail!',
+            'required': 'Campo obrigatório, por favor insira o seu endereço de e-mail!',# noqa
         },
         widget=forms.EmailInput(
             attrs={
@@ -92,7 +92,7 @@ class Cadastrar(forms.ModelForm):
         label='Confirmação de Senha',
         help_text='Digite novamente a sua senha.',
         error_messages={
-            'required': 'Campo obrigatório, por favor insira novamente a sua senha!',
+            'required': 'Campo obrigatório, por favor insira novamente a sua senha!', # noqa
         },
         widget=forms.PasswordInput(
             attrs={
