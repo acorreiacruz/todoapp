@@ -2,13 +2,13 @@ from django import forms
 
 
 class LoginForm(forms.Form):
-    email = forms.CharField(
+    username = forms.CharField(
         required=True,
         label='E-mail',
         help_text='Insira o seu endereço de e-mail já cadastrado',
-        widget=forms.EmailInput(
+        widget=forms.TextInput(
             attrs={
-                'placeholder': 'Ex.: jhondoe@email.com'
+                'placeholder': 'Ex.: jhondoe'
             }
         )
     )
