@@ -28,6 +28,7 @@ def cadastrar_validar(request):
         user.set_password(user.password)
         form.save()
         del(request.session['dados_form'])
+        return redirect(reverse('usuarios:login'))
 
     return redirect('usuarios:cadastrar')
 
