@@ -4,7 +4,7 @@ from django import forms
 class LoginForm(forms.Form):
     username = forms.CharField(
         required=True,
-        label='E-mail',
+        label='Nome de Usuário',
         help_text='Insira o seu endereço de e-mail já cadastrado',
         widget=forms.TextInput(
             attrs={
