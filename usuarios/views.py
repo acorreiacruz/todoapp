@@ -2,7 +2,8 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import CadastrarForm, LoginForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
@@ -61,4 +62,11 @@ def login_view_validar(request):
     else:
         messages.error(request, 'Nome de usuário ou senha inválidos!')
 
+    return redirect('usuarios:login')
+
+
+@login_required(login_url='usuarios:login')
+def logout_view(request):
+
+    logout(request)
     return redirect('usuarios:login')
