@@ -22,5 +22,10 @@ urlpatterns = [
         'login/validar/',
         views.login_view_validar,
         name='login_validar'
-    )
+    ),
+    path(
+        'logout/',
+        views.logout_view,
+        name='logout'
+    ),
 ]
