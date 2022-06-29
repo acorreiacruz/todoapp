@@ -52,12 +52,12 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Tests
-test.py
-tests.py
-test_*.py
-tests_*.py
-*_tests.py
-*_test.py
+# test.py
+# tests.py
+# test_*.py
+# tests_*.py
+# *_tests.py
+# *_test.py
 
 # Django Migrations
 migrations/
