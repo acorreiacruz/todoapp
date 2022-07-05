@@ -65,7 +65,7 @@ def login_view_validar(request):
     return redirect('usuarios:login')
 
 
-@login_required(login_url='usuarios:login')
+@login_required(login_url='usuarios:login', redirect_field_name='next')
 def logout_view(request):
 
     logout(request)
