@@ -265,3 +265,17 @@ class FormularioCadastrarIntegrationTest(DjangoTestCase):
         conteudo = resposta.content.decode('utf-8')
         msg = 'Ambas as senhas devem ser iguais'
         self.assertIn(msg, conteudo)
+
+    def teste_login_de_usuario_cadastrado(self):
+        self.client.post(
+            reverse('usuarios:cadastrar_validar'),
+            self.data,
+            follow=True
+        )
+
+        usuario_autenticado = self.client.login(
+            username='jhondoe',
+            password='Qaz321654',
+        )
+
+        self.assertTrue(usuario_autenticado)
