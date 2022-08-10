@@ -9,7 +9,14 @@
 <body>
     <h2>Login</h2>
     {% if request.user.is_authenticated %}
-        <p>Você está logado como {{ request.user.username }}</p>
+        <div>
+            Você está logado como {{ request.user.username }}. Para sair clique
+            <form action="{% url 'usuarios:logout' %}"  method="POST" >
+                {% csrf_token %}
+                <input type="text" hidden value="{{ request.user.username }}" name="user">
+                <button type="submit">aqui</button>
+            </form>.
+        </div>
     {% endif %}
     <form action="{{ form_action }}" method="POST">
         {% csrf_token %}
