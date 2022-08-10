@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Meus apps
     'todo',
-    'api',
     'usuarios',
     # Apps terceiros
     'rest_framework',
