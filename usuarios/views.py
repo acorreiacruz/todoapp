@@ -67,6 +67,9 @@ def login_view_validar(request):
 
 @login_required(login_url='usuarios:login', redirect_field_name='next')
 def logout_view(request):
-
+    if not request.POST:
+        return Http404()
+    if request.user.username != request.POST.get('user-input'):
+        return redirect('usuarios:login')
     logout(request)
     return redirect('usuarios:login')
