@@ -26,6 +26,14 @@ def detalhar_tarefas(request, pk):
     })
 
 
+def editar_tarefas(request, pk):
+    Tarefa.objects.filter(pk=pk).update(
+        title=request.POST.get('title'),
+        description=request.POST.get('description')
+    )
+    return redirect('/')
+
+
 def excluir_tarefa(request, pk):
     Tarefa.objects.filter(id=pk).delete()
     return redirect('/')
