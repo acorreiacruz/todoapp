@@ -11,6 +11,7 @@ urlpatterns = [
         name="detalhar"
     ),
     path('tarefas/excluir/<int:pk>/', views.excluir_tarefa, name='excluir'),
+    path('tarefas/editar/<int:pk>/', views.editar_tarefas, name="editar"),
     path(
         'tarefas/finalizar/<int:pk>/',
         views.finalizar_tarefa,
