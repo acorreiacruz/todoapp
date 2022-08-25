@@ -1,7 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-{% include 'todo/partials/head.html' %}
+{% include 'global/head.html' %}
 <body>
-    {% block content %}{% endblock content %}
+    <header class="header">
+        <h1 class="header-title"><a href="{% url 'todo:listar' %}">To Do App</a></h1>
+    </header>
+    <main class="main-container">
+        {% block adicional %}{% endblock adicional %}
+    </main>
 </body>
 </html>
