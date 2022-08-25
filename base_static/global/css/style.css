@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Caveat', cursive;
+}
+
+header {
+    background-color: rgb(38, 22, 255);
+    padding: 10px;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: fit-content;
+    height: fit-content;
+}
+
+header h1 {
+    display: flex;
+    font-size: 35px;
+    color: aliceblue;
+    margin: 0 auto;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    margin: 0px auto;
+}
+
+header p {
+    width: fit-content;
+    height: fit-content;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.main-container{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 550px;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-name {
+    margin: 0px auto 5px auto;
+    width: fit-content;
+    height: fit-content;
+}
+
+.page-name p {
+    font-size: 30px;
+    font-weight: bold;
+    color: blue;
+}
+
+.container{
+    width: 50%;
+    height: fit-content;
+    max-height: 80%;
+    margin: 10px auto;
+    background-color: rgb(101, 103, 255);
+    padding: 20px 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.50);
+}
+
+.flex-container{
+    display:flex;
+    flex-direction: row;
+    /* background-color: rgb(255, 255, 255); */
+    /* padding: 5px 5px; */
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.task-input-container{
+    width: 80%;
+    height: 100%;
+    margin-right: 5px;
+}
+
+.task-input-container input {
+    font-size: 27px;
+    width: 100%;
+    height: 100%;
+    padding: 2px 2px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+}
+
+.task-button-container{
+    width: 20%;
+}
+
+.task-button-container input {
+    background-color: rgb(156, 145, 255);
+    color: rgb(252, 252, 252);
+    font-size: 27px;
+    width: 100%;
+    height: 100%;
+    padding: 2px 2px;
+    text-align: center;
+    border-radius: 5px;
+    border: 0px solid black;
+}
+
+.task-button-container input:hover{
+    background-color: rgb(52, 49, 255);
+    cursor: pointer;
+}
+
+.content-container{
+    border-radius: 5px;
+    background-color: rgb(156, 145, 255);
+    padding: 10px 10px;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    padding: 5px 8px;
+    margin-bottom: 7px;
+    background-color: rgb(185, 178, 255);
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    outline: none;
+}
+
+.content:last-child{
+    margin-bottom: 0px;
+}
+
+.content p {
+    margin-right: 7px;
+    width: 90%;
+}
+
+.content a {
+    display: block;
+    margin-right: 7px;
+    width: fit-content;
+    height: fit-content;
+    padding: 0px;
+    border: 0px;
+}
+
+.icon-link i {
+    width: 100%;
+    height: 100%;
+}
+
+.content .fa-square-xmark{
+    color: rgb(165, 0, 0);
+}
+
+.content .fa-square-xmark:hover{
+    color: rgb(255, 0, 0);
+}
+
+.content .fa-square-check {
+    color: rgb(0, 165, 0);
+}
+
+.content .fa-square-check:hover {
+    color: rgb(0, 255, 0);
+}
+
+.content .fa-square-pen {
+    color:rgb(0, 0, 165)
+}
+
+.content .fa-square-pen:hover {
+    color:rgb(0, 0, 255)
+}
+
+.icon-link:last-child{
+    margin-right: 0px;
+}
+
+.pagination{
+    margin: 0px auto;
+}
+
+.container .pagination-container .pagination {
+    margin-top: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+}
+
+.grid-container-login {
+    display: grid;
+    gap: 40px 15px;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: auto auto;
+}
+
+.input-container{
+    width: 100%;
+    height: fit-content;
+}
+
+.input-container label{
+    font-size: 28px;
+    color: white;
+}
+
+.input-container input {
+    width: 100%;
+    font-size: 27px;
+    border-radius: 5px;
+    border: none;
+}
+
+.button-container {
+    width: fit-content;
+    height: fit-content;
+    margin-top: 25px;
+}
+
+.button-container button{
+    background-color: rgb(156, 145, 255);
+    color: rgb(252, 252, 252);
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    padding: 3px 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: 0px solid black;
+}
+
+.form-container p {
+    width: fit-content;
+    margin: 0px auto;
+    font-size: 25px;
+    color: white;
+}
+
+.form-container a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+footer{
+    background-color: rgb(38, 22, 255);
+    height: fit-content;
+    padding: 5px 0px 5px 5px;
+}
+
+footer p{
+    height: fit-content;
+    width: fit-content;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.message {
+    padding: 5px 0px 5px 0px;
+    border: 3px solid;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.message p {
+    width: fit-content;
+    height: fit-content;
+    margin: 0px auto;
+    font-size: 25px;
+}
+
+.error{
+    color: red;
+    background-color: rgba(255, 0, 0, 0.219);
+    font-weight: bold;
+}
+
+.success{
+    color: blue;
+    background-color: rgba(0, 0, 255, 0.219);
+    font-weight: bold;
+}
+
+.information{
+    color: green;
+    background-color: rgba(0, 255, 0, 0.219);
+    font-weight: bold;
+}
+
+.flex-container-detail{
+    display: flex;
+    flex-direction: column;
+}
+
+.textarea-container {
+    margin-top: 5px;
+    width: 100%;
+    flex-direction: column;
+}
+.textarea-container p {
+    width: fit-content;
+    height: 100%;
+    float: left;
+}
+
+.textarea-container textarea{
+    width: 100%;
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+.button-editar{
+    background-color: rgb(156, 145, 255);
+    color: rgb(252, 252, 252);
+    font-size: 25px;
+    padding: 2px;
+    border-radius: 5px;
+    border: 0px;
+}
+
+.button-editar:hover{
+    background-color: rgb(52, 49, 255);
+    cursor: pointer;
+}
+
+.button-editar:active{
+    background-color: blue;
+    border-radius: 5px;
+}
