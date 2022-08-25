@@ -1,31 +1,29 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'global/css/styles.css' %}">
-    <title>Nova Tarefa</title>
-</head>
-<body>
-    <h1>Cadastre uma nova tarefa.</h1>
-    <form action="{{ form_action }}" method="POST">
-        {% csrf_token %}
-        {% for field in form %}
-            <div>
-                <label for="{{ field.id_for_field }}"> {{ field.label }}:</label>
-                {{ field }}
-                {% if field.help_text %}
-                    <p>{{ field.help_text }}</p>
-                {% endif %}
-            </div>
-            {{ form.errors }}
-        {% endfor %}
-        <button type="submit">Cadastrar</button>
-        {% if form.errors %}
-            {{ form.errors }}
-        {% endif %}
-    </form>
-</body>
-</html>
+{% extends 'global/base.html' %}
+{% block aidcional %}
+    <div class="page-name">
+        <p>Criar</p>
+    </div>
+    <div class="container">
+        <div class="form-container">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <div class="grid-container-login">
+                    <div class="input-container">
+                        <label for="first_name">Title:</label>
+                        <input type="text" id="first_name" name="first_name">
+                    </div>
+                    <div class="input-container">
+                        <label for="last_name">Description:</label>
+                        <input type="text"
+                        id="last_name" name="last_name">
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock aidcional %}
+

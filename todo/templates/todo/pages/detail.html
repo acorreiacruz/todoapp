@@ -1,16 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarefa {{ tarefa.id }}</title>
-</head>
-<body>
-    <h2>{{ tarefa.title }}</h2>
-    <hr>
-    <p>
-        {{ tarefa.description }}
-    </p>
-</body>
-</html>
+{% extends 'global/base.html' %}
+{% block title %}Editar{% endblock title %}
+{% block adicional %}
+    <div class="container">
+        <div class="form-container">
+            <form action="{% url 'todo:editar' tarefa.id %}" method="POST">
+                {% csrf_token %}
+                <div class="flex-container-detail">
+                    <div class="input-container">
+                        <label for="titulo-input">Título:</label>
+                        <input type="text" name="title" id="titulo-input" value="{{tarefa.title}}">
+                    </div>
+                    <div class="textarea-container">
+                        <p><label for="descricao-input">Descricão:</label></p>
+                        <textarea name="description" id="descricao-input" rows=6 maxlength=300>
+                            {{tarefa.description}}
+                        </textarea>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button type="submit" class="button-editar">Editar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock adicional %}

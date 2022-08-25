@@ -1,40 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <header>
-        <h1>To Do</h1>
-    </header>
-    <main>
-        <div>
-            <form action="{% url 'todo:buscar' %}" method='GET'>
-                {% csrf_token %}
-                <input type="text" name='q'>
-                <button type="submit">Buscar</button>
-            </form>
-        </div>
-        {% for tarefa in tarefas  %}
-            <div>
-                <h2>{{ tarefa.title }}</h2>
-                <p>Criada: {{ tarefa.created_at | date }} | Atualizada: {{ tarefa.updated_at | date }}</p>
+{% extends 'global/base.html' %}
+{% block title %}Home{% endblock title %}
+{% block adicional %}
+<div class="container">
+    <div class="form-container">
+        {% include 'todo/partials/form.html' %}
+    </div>
+    <div class="content-container">
+        {% for tarefa in tarefas %}
+            <div class="content">
+                <p>{{tarefa.title}}</p>
+                <a href="{% url 'todo:excluir' tarefa.id %}" class="icon-link"><i class="fas fa-square-xmark"></i></a>
+                <a href="{% url 'todo:finalizar' tarefa.id %}" class="icon-link"><i class="fas fa-square-check"></i></a>
+                <a href="{% url 'todo:detalhar' tarefa.id %}" class="icon-link"><i class="fas fa-square-pen"></i></a>
             </div>
-            <button><a href="{% url 'todo:detalhar' tarefa.id %}">Detalhar</a></button>
-            <button><a href="{% url 'todo:finalizar' tarefa.id %}">Finalizar</a></button>
-            <button><a href="{% url 'todo:excluir' tarefa.id %}">Excluir</a></button>
-            <hr>
-        {% empty %}
-            <p>
-                Todas as tarefas foram atualizadas!
-            </p>
         {% endfor %}
-        <div>
-            <button><a href="{% url 'todo:cadastrar' %}">Nova Tarefa</a></button>
-        </div>
-    </main>
-</body>
-</html>
+    </div>
+    <div class="pagination-container">
+        <div class="pagination">1.2.3...10.11</div>
+    </div>
+</div>
+{% endblock %}
