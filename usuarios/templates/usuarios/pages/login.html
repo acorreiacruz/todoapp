@@ -1,37 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
-    {% if request.user.is_authenticated %}
-        <div>
-            Você está logado como {{ request.user.username }}. Para sair clique
-            <form action="{% url 'usuarios:logout' %}"  method="POST" >
+{% extends 'global/base.html' %}
+{% block title %}Login{% endblock title %}
+{% block adicional %}
+    <div class="page-name">
+        <p>Login</p>
+    </div>
+    <div class="container">
+        <div class="form-container">
+            <p>
+                Caso ainda não possui uma conta, clique <a href="{% url 'usuarios:cadastrar' %}">aqui</a> para se cadastrar!
+            </p>
+            <form action="{{form.action}}" method="POST">
                 {% csrf_token %}
-                <input type="text" hidden value="{{ request.user.username }}" name="user">
-                <button type="submit">aqui</button>
-            </form>.
+                <div class="grid-container-login">
+                    {% for field in form %}
+                        <div class="input-container">
+                            <label for="{{field.id_for_label}}">{{field.label}}</label>
+                            {{field}}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="button-container">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
         </div>
-    {% endif %}
-    <form action="{{ form_action }}" method="POST">
-        {% csrf_token %}
-        {% for field in form %}
-            <p><label for="{{ field.id_for_field }}"> {{ field.label }}</label></p>
-            <p>{{ field }}</p>
-            {% if field.help_text %}
-                <p>{{ field.help_text }}</p>
-            {% endif %}
-            <p>{{field.errors}}</p>
-        {% endfor %}
-        <button type="submit">Login</button>
-    </form>
-    <p>
-        Caso ainda não tenha uma conta, clique <a href="{% url 'usuarios:cadastrar' %}">aqui</a> para se cadastrar!
-    </p>
-</body>
-</html>
+    </div>
+{% endblock adicional %}
+

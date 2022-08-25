@@ -1,28 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="{{ form_action }}" method="POST">
-        {% csrf_token %}
-        {% for field in form %}
-            <div>
-                <p><label for="{{ field.id_for_label }}"> {{ field.label }}</label></p>
-                <p>{{ field }}</p>
-                {% if field.help_text %}
-                    <p>{{ field.help_text }}</p>
-                {% endif %}
-                <p>{{ field.errors }}</p>
-            </div>
-        {% endfor %}
-        <button type="submit">Cadastrar</button>
-    </form>
-    <p>
-        Caso já tenha uma conta, clique <a href="{% url 'usuarios:login' %}">aqui</a> para realizar o login!
-    </p>
-</body>
-</html>
+{% extends 'global/base.html' %}
+{% block adicional %}
+    <div class="page-name">
+        <p>Cadastrar</p>
+    </div>
+    <div class="container">
+        <div class="form-container">
+            <p>
+                Caso já possua uma conta, clique <a href="{% url 'usuarios:login' %}">aqui</a> para fazer login!
+            </p>
+            <form action="{{form.action}}" method="POST">
+                {% csrf_token %}
+                <div class="grid-container-login">
+                    {% for field in form %}
+                        <div class="input-container">
+                            <label for="{{field.id_for_label}}">{{field.label}}</label>
+                            {{field}}
+                        </div>
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <div class="message error">
+                                    {{field.errors}}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="button-container">
+                    <button type="submit">Cadastrar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock adicional %}
