@@ -137,6 +137,8 @@ class CadastrarForm(forms.ModelForm):
                 )
             })
 
+        return cleaned_data
+
     class Meta:
         model = User
         fields = [
