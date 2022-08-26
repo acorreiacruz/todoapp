@@ -50,7 +50,7 @@ def cadastrar_tarefas(request):
 
     return render(request, 'todo/pages/create.html', context={
         'form': form,
-        'form_action': reverse('todo:cadastrar_validar'),
+        'form_action': reverse('todo:cadastrar_validar')
     })
 
 
@@ -65,6 +65,7 @@ def cadastrar_tarefas_validar(request):
     if form.is_valid():
         form.save()
         del(request.session['dados_form'])
+        return redirect('/')
 
     return redirect('todo:cadastrar')
 
