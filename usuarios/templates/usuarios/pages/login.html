@@ -9,7 +9,7 @@
             <p>
                 Caso ainda não possui uma conta, clique <a href="{% url 'usuarios:cadastrar' %}">aqui</a> para se cadastrar!
             </p>
-            <form action="{{form.action}}" method="POST">
+            <form action="{{form_action}}" method="POST">
                 {% csrf_token %}
                 <div class="grid-container-login">
                     {% for field in form %}

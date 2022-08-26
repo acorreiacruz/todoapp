@@ -8,7 +8,7 @@
             <p>
                 Caso já possua uma conta, clique <a href="{% url 'usuarios:login' %}">aqui</a> para fazer login!
             </p>
-            <form action="{{form.action}}" method="POST">
+            <form action="{{form_action}}" method="POST">
                 {% csrf_token %}
                 <div class="grid-container-login">
                     {% for field in form %}
