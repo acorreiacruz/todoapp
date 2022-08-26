@@ -1,29 +1,25 @@
 {% extends 'global/base.html' %}
-{% block aidcional %}
-    <div class="page-name">
-        <p>Criar</p>
-    </div>
+{% block title %}Editar{% endblock title %}
+{% block adicional %}
     <div class="container">
         <div class="form-container">
-            <form action="#" method="POST">
+            <form action="{{form_action}}" method="POST">
                 {% csrf_token %}
-                <div class="grid-container-login">
+                <div class="flex-container-detail">
                     <div class="input-container">
-                        <label for="first_name">Title:</label>
-                        <input type="text" id="first_name" name="first_name">
+                        <label for="titulo-input">Título:</label>
+                        <input type="text" name="title" id="titulo-input" value="{{tarefa.title}}">
                     </div>
-                    <div class="input-container">
-                        <label for="last_name">Description:</label>
-                        <input type="text"
-                        id="last_name" name="last_name">
+                    <div class="textarea-container">
+                        <p><label for="descricao-input">Descricão:</label></p>
+                        <textarea name="description" id="descricao-input" rows=6 maxlength=300></textarea>
                     </div>
                 </div>
                 <div class="button-container">
-                    <button type="submit">Enviar</button>
+                    <button type="submit" class="button-editar">Criar</button>
                 </div>
             </form>
-
         </div>
     </div>
-{% endblock aidcional %}
+{% endblock adicional %}
 
