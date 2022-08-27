@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from ..todo.models import Tarefa
 
-# Create your views here.
+
+class TarefaModelViewSet(viewsets.ModelViewSet):
+    queryset = Tarefa
+    http_method_names = ['get', 'post', 'patch', 'delete', 'options', 'head']
