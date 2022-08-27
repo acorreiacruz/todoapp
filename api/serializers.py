@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..todo.models import Tarefa
+from todo.models import Tarefa
 
 
 class TarefaSerializer(serializers.ModelSerializer):
