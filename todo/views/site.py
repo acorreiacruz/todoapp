@@ -5,6 +5,10 @@ from ..models import Tarefa
 from ..forms import Cadastrar
 
 
+def get_tarefa_object(pk):
+    return Tarefa.objects.filter(pk=pk)
+
+
 def listar_tarefas(request):
     tarefas = Tarefa.objects.filter(
         done=False,
@@ -27,7 +31,7 @@ def detalhar_tarefas(request, pk):
 
 
 def editar_tarefas(request, pk):
-    Tarefa.objects.filter(pk=pk).update(
+    get_tarefa_object(pk).update(
         title=request.POST.get('title'),
         description=request.POST.get('description')
     )
@@ -35,12 +39,12 @@ def editar_tarefas(request, pk):
 
 
 def excluir_tarefa(request, pk):
-    Tarefa.objects.filter(id=pk).delete()
+    get_tarefa_object(pk).delete()
     return redirect('/')
 
 
 def finalizar_tarefa(request, pk):
-    Tarefa.objects.filter(id=pk).update(done=True)
+    get_tarefa_object(pk).update(done=True)
     return redirect('/')
 
 
