@@ -2,8 +2,11 @@ from rest_framework.permissions import BasePermission
 
 
 class IsOwner(BasePermission):
-    def has_object_permission(self, request, view, obj):
-        return request.user == obj.author
+
+    message = "Você precisa ser o autor da receita para manipulá-la"
 
     def has_permission(self, request, view):
-        return super().has_permission(request, view)
+        return True if request.user.is_authenticated else False
+
+    def has_object_permission(self, request, view, obj):
+        return request.user == obj.author
