@@ -24,8 +24,6 @@ api_users_urls.register(
     basename='todo-api-users'
 )
 
-print(api_users_urls.urls)
-print(api_tarefas_urls.urls)
 
 urlpatterns = [
     path(
