@@ -47,7 +47,7 @@ class UserReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
     http_method_names = ['get', 'options', 'head']
 
     def get_queryset(self):
-        qs = super().get_queryset().filter(pk=self.request.user.id)
+        qs = self.get_queryset().filter(username=self.request.user.username)
         return qs
 
     @action(detail=False, url_path='me', url_name='me')
