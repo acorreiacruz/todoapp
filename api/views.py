@@ -17,7 +17,7 @@ class TarefaModelViewSet(viewsets.ModelViewSet):
     serializer_class = TarefaSerializer
     http_method_names = ['get', 'post', 'patch', 'delete', 'options', 'head']
     permission_classes = [IsAuthenticated,]
-    pagination_class = [PaginacaoCustomizada,]
+    # pagination_class = [PaginacaoCustomizada,]
 
     def get_object(self):
         pk = self.kwargs.get('pk')
@@ -50,7 +50,7 @@ class UserReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
         qs = super().get_queryset().filter(pk=self.request.user.id)
         return qs
 
-    @action(detail=False, url_path='api/me/', url_name='api-usuarios-me')
+    @action(detail=False, url_path='me', url_name='me')
     def me(self, *args, **kwargs):
         user = self.get_queryset()
         serializer = self.get_serializer(instance=user)
