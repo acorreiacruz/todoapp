@@ -10,13 +10,22 @@ from rest_framework_simplejwt.views import (
 
 app_name = 'api'
 
-api_todo_urls = SimpleRouter()
-api_todo_urls.register(
+api_tarefas_urls = SimpleRouter()
+api_tarefas_urls.register(
     prefix='tarefas',
     viewset=views.TarefaModelViewSet,
-    basename='todo-api'
+    basename='todo-api-tarefas'
 )
 
+api_users_urls = SimpleRouter()
+api_users_urls.register(
+    prefix='usuarios',
+    viewset=views.UserReadOnlyModelViewSet,
+    basename='todo-api-users'
+)
+
+print(api_users_urls.urls)
+print(api_tarefas_urls.urls)
 
 urlpatterns = [
     path(
@@ -34,5 +43,6 @@ urlpatterns = [
         TokenVerifyView.as_view(),
         name='token_verify'
     ),
-    path('', include(api_todo_urls.urls)),
+    path('', include(api_tarefas_urls.urls)),
+    path('', include(api_users_urls.urls)),
 ]
