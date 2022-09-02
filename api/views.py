@@ -47,11 +47,11 @@ class UserReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
     http_method_names = ['get', 'options', 'head']
 
     def get_queryset(self):
-        qs = self.get_queryset().filter(username=self.request.user.username)
-        return qs
+        qs = super().get_queryset()
+        return qs.filter(username=self.request.user.username)
 
     @action(detail=False, url_path='me', url_name='me')
     def me(self, *args, **kwargs):
-        user = self.get_queryset()
-        serializer = self.get_serializer(instance=user)
+        user = self.get_queryset().first()
+        serializer = self.get_serializer(instance=user, many=False)
         return Response(serializer.data)
