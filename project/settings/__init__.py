@@ -8,4 +8,4 @@ from .security import *
 from .i18n import * # isort:skip
 from .static_files import *
 from .simple_jwt import *
-
+from .rest_framework import *
