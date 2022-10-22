@@ -191,11 +191,37 @@ header p {
     margin-right: 0px;
 }
 
-.pagination{
+.pagination-content{
+    padding-top: 10px;
     margin: 0px auto;
+    display: flex;
+    flex-direction: row;
 }
 
-.container .pagination-container .pagination {
+.pagination-content .page-link{
+    display: block;
+    width: 37px;
+    margin-right: 10px;
+    position: relative;
+    text-decoration: none;
+    color: white;
+    background-color: blue;
+    text-align: center;
+    font-size: 25px;
+}
+
+
+.page-item{
+    margin-right: 10px;
+}
+
+.page-link:active{
+    top: 1px;
+    color: yellow;
+}
+
+
+.container .pagination-container .pagination-content{
     margin-top: 5px;
     font-size: 25px;
     font-weight: bold;
@@ -345,3 +371,4 @@ footer p{
     background-color: blue;
     border-radius: 5px;
 }
+
