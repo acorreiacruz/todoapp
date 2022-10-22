@@ -1,0 +1,17 @@
+{% if tarefas.has_other_pages %}
+    <div class="pagination-container">
+        <div class="pagination-content">
+            {% if range_de_paginacao.primeira_pagina_fora_do_range %}
+                <a class="page-link" href="?page=1">1</a>
+                <span class="page-item">...</span>
+            {% endif %}
+            {% for page in range_de_paginacao.range_de_paginas %}
+                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            {% endfor %}
+            {% if range_de_paginacao.ultima_pagina_fora_do_range %}
+                <span class="page-item">...</span>
+                <a class="page-link" href="?page={{ tarefas.paginator.num_pages }}">{{ tarefas.paginator.num_pages }}</a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
