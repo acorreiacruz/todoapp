@@ -57,6 +57,7 @@ def login_view_validar(request):
         if usuario_autenticado is not None:
             messages.success(request, 'Você está logado!')
             login(request, usuario_autenticado)
+            return redirect('todo:listar')
         else:
             messages.error(request, 'Credenciais inválidas')
     else:
@@ -67,9 +68,16 @@ def login_view_validar(request):
 
 @login_required(login_url='usuarios:login', redirect_field_name='next')
 def logout_view(request):
+
     if not request.POST:
-        return Http404()
-    if request.user.username != request.POST.get('user-input'):
+        messages.error(request, "Requisição de logout inválida !")
         return redirect('usuarios:login')
+
+    if request.user.username != request.POST.get('user-input'):
+        messages.error(request, "Usuário inválido para logout !")
+        return redirect('usuarios:login')
+
     logout(request)
+
+    messages.success(request, "Logout realizado com sucesso !")
     return redirect('usuarios:login')
