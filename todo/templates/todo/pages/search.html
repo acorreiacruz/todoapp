@@ -1,7 +1,6 @@
 {% extends 'global/base.html' %}
-{% block title %}To Do App | Home{% endblock title %}
+{% block title %}Termo buscado:{{ termo_buscado }}{% endblock title %}
 {% block adicional %}
-{% include 'todo/partials/login_message.html' %}
 <div class="container">
     <div class="form-container">
         {% include 'todo/partials/form.html' %}

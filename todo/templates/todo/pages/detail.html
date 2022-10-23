@@ -1,5 +1,5 @@
 {% extends 'global/base.html' %}
-{% block title %}Editar{% endblock title %}
+{% block title %}Editar Tarefa: {{ tarefa.id }}{% endblock title %}
 {% block adicional %}
     <div class="container">
         <div class="form-container">
@@ -8,12 +8,12 @@
                 <div class="flex-container-detail">
                     <div class="input-container">
                         <label for="titulo-input">Título:</label>
-                        <input type="text" name="title" id="titulo-input" value="{{tarefa.title}}">
+                        <input type="text" name="title" id="titulo-input" value="{{ tarefa.title }}">
                     </div>
                     <div class="textarea-container">
                         <p><label for="descricao-input">Descricão:</label></p>
                         <textarea name="description" id="descricao-input" rows=6 maxlength=300>
-                            {{tarefa.description}}
+                            {{ tarefa.description | ljust:500 }}
                         </textarea>
                     </div>
                 </div>

@@ -1,10 +1,30 @@
-{% include 'global/head.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    {% include 'global/partials/head.html' %}
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+
 <body>
     <header class="header">
-        <h1 class="header-title"><a href="{% url 'todo:listar' %}">To Do App</a></h1>
+        <div class="menu-container">
+            <form class="inline-form form-logout" action="{% url 'usuarios:logout' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" value={{ request.user.username }} name="user-input">
+                <input type="submit" class="btn-sair" value="Sair">
+            </form>
+        </div>
+        <h1 class="header-title">
+            <a href="{% url 'todo:listar' %}">To Do App</a>
+        </h1>
     </header>
     <main class="main-container">
+        {% include 'global/partials/messages.html' %}
         {% block adicional %}{% endblock adicional %}
     </main>
+    <script src="{% static 'global/js/index.js' %}"></script>
 </body>
+
 </html>
