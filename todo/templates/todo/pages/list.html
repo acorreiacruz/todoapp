@@ -1,20 +1,25 @@
 {% extends 'global/base.html' %}
 {% block title %}To Do App | Home{% endblock title %}
 {% block adicional %}
-{% include 'todo/partials/login_message.html' %}
 <div class="container">
     <div class="form-container">
         {% include 'todo/partials/form.html' %}
     </div>
     <div class="content-container">
-        {% for tarefa in tarefas %}
-            <div class="content">
-                <p>{{tarefa.title}}</p>
-                <a href="{% url 'todo:excluir' tarefa.id %}" class="icon-link"><i class="fas fa-square-xmark"></i></a>
-                <a href="{% url 'todo:finalizar' tarefa.id %}" class="icon-link"><i class="fas fa-square-check"></i></a>
-                <a href="{% url 'todo:detalhar' tarefa.id %}" class="icon-link"><i class="fas fa-square-pen"></i></a>
-            </div>
-        {% endfor %}
+        {% if tarefas %}
+            {% for tarefa in tarefas %}
+                <div class="content">
+                    <p>{{tarefa.title}}</p>
+                    <a href="{% url 'todo:excluir' tarefa.id %}" class="icon-link btn-excluir"><i class="fas fa-square-xmark"></i></a>
+                    <a href="{% url 'todo:finalizar' tarefa.id %}" class="icon-link"><i class="fas fa-square-check"></i></a>
+                    <a href="{% url 'todo:detalhar' tarefa.id %}" class="icon-link"><i class="fas fa-square-pen"></i></a>
+                </div>
+            {% endfor %}
+        {% else %}
+                <div class="content">
+                    Nenhuma tarefa cadastrada ou todas finalizadas !
+                </div>
+        {% endif %}
     </div>
     {% include 'global/partials/pagination.html' %}
 </div>
