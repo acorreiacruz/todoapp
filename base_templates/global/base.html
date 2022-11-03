@@ -15,6 +15,7 @@
                 <input type="hidden" value={{ request.user.username }} name="user-input">
                 <input type="submit" class="btn-sair" value="Sair">
             </form>
+            <div class="btn-add-task"><a href="{% url 'todo:cadastrar' %}">Nova Tarefa</a></div>
         </div>
         <h1 class="header-title">
             <a href="{% url 'todo:listar' %}">To Do App</a>
