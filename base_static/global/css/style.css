@@ -8,8 +8,49 @@
 }
 
 header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     background-color: rgb(38, 22, 255);
     padding: 10px;
+}
+
+.menu-container{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: 100%;
+    background-color: none;
+}
+
+.btn-sair{
+    width: 100%;
+    color: white;
+    font-size: 30px;
+    float: left;
+    border: none;
+    outline: none;
+    background-color: rgb(38, 22, 255);
+}
+
+.btn-sair:hover, .btn-add-task a:hover{
+    color: aqua;
+    cursor: pointer;
+}
+
+.btn-sair:active, .btn-add-task a :active{
+    color: white;
+}
+
+.btn-add-task{
+    width: fit-content;
+    margin-left: 15px;
+}
+
+.btn-add-task a{
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
 }
 
 header a {
@@ -70,6 +111,13 @@ header p {
     padding: 20px 20px;
     border-radius: 5px;
     box-shadow: 2px 2px rgba(0, 0, 0, 0.50);
+}
+
+.login-message{
+    width: 50%;
+    text-align: center;
+    color: black;
+    font-size: 28px;
 }
 
 .flex-container{
@@ -210,14 +258,16 @@ header p {
     font-size: 25px;
 }
 
+.pagina-atual{
+    color: aqua;
+}
 
 .page-item{
     margin-right: 10px;
 }
 
 .page-link:active{
-    top: 1px;
-    color: yellow;
+    top: 2px;
 }
 
 
@@ -299,38 +349,6 @@ footer p{
     font-weight: bold;
 }
 
-.message {
-    padding: 5px 0px 5px 0px;
-    border: 3px solid;
-    border-radius: 5px;
-    width: 50%;
-}
-
-.message p {
-    width: fit-content;
-    height: fit-content;
-    margin: 0px auto;
-    font-size: 25px;
-}
-
-.error{
-    color: red;
-    background-color: rgba(255, 0, 0, 0.219);
-    font-weight: bold;
-}
-
-.success{
-    color: blue;
-    background-color: rgba(0, 0, 255, 0.219);
-    font-weight: bold;
-}
-
-.information{
-    color: green;
-    background-color: rgba(0, 255, 0, 0.219);
-    font-weight: bold;
-}
-
 .flex-container-detail{
     display: flex;
     flex-direction: column;
@@ -372,3 +390,38 @@ footer p{
     border-radius: 5px;
 }
 
+/* messages */
+.message-container {
+    width: 50%;
+}
+
+.message{
+    text-align: center;
+    padding: 5px 0px 5px 0px;
+    width: 100%;
+    height: 100%;
+    font-size: 25px;
+    border-radius: 5px;
+}
+
+.message-error{
+    border: 3px solid red;
+    color: red;
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.219);
+    font-weight: bold;
+}
+
+.message-success{
+    border: 3px solid blue;
+    color: blue;
+    background-color: rgba(0, 0, 255, 0.219);
+    font-weight: bold;
+}
+
+.message-information{
+    border: 3px solid green;
+    color: green;
+    background-color: rgba(0, 255, 0, 0.219);
+    font-weight: bold;
+}
